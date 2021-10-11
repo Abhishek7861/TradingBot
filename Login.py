@@ -12,7 +12,7 @@ def loginUser():
     "USER_KEY":UserKey,
     "ENCRYPTION_KEY":EncryptionKey
     }
-    client = FivePaisaClient(email="abhishek82786@gmail.com", passwd=loginPassword, dob="19950530",cred=cred)
+    client = FivePaisaClient(email=email, passwd=loginPassword, dob=dob,cred=cred)
     client.login()
     return client
 
