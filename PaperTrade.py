@@ -33,15 +33,34 @@ class paperTrade:
         strikeChoice = int(input())
         strike = strikeList[strikeChoice]
 
-        scripSymbol = symbol+" "+str(dateWithSpace(date))+" CE "+str(strike)+".00"
+        print("Choose a Option Type")
+        print("0: CE")
+        print("1: PE")
+        optionType = int(input())
+        if optionType==0:
+            optionType='CE'
+        elif optionType==1:
+            optionType='PE'
+
+        print("Choose a Position Type")
+        print("0: SELL")
+        print("1: BUY")
+        positionType = int(input())
+        if positionType==0:
+            positionType="SELL"
+        elif positionType==1:
+            positionType='BUY'
+
+        scripSymbol = symbol+" "+str(dateWithSpace(date))+" "+optionType+" "+str(strike)+".00"
         expiry = charToNum(date)
-        print(scripSymbol)
-        print(strike)
-        print(expiry)
+        Exch='N'
+        ExchType='D'
 
-        #NOTE : Symbol has to be in the same format as specified in the example below.
-        req_list_=[{"Exch":"N","ExchType":"D","Symbol":scripSymbol,"Expiry":expiry,"StrikePrice":str(strike),"OptionType":"CE"}]
-        print(req_list_)
-        print(self.client.fetch_market_feed(req_list_))
+        price = self.getLTP(Exch,ExchType,scripSymbol,expiry,strike,optionType)['Data'][0]['LastRate']
+        print("Order placed at : ",price)
+        return (scripSymbol,strike,expiry,optionType,positionType,Exch,ExchType,price)
 
+    def getLTP(self,Exch,ExchType,scripSymbol,expiry,strike,optionType):
+        req_list_=[{"Exch":Exch,"ExchType":ExchType,"Symbol":scripSymbol,"Expiry":expiry,"StrikePrice":str(strike),"OptionType":optionType}]
+        return self.client.fetch_market_feed(req_list_)
 
