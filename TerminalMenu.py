@@ -19,7 +19,7 @@ class OptionTrade:
    
     def printTrade(self):
         output = self.scripSymbol+" "+self.positionType+" "+str(self.price)
-        print(output)
+        print(output, end=' ')
 
     def editTrade(self,price):
         self.price = price
@@ -63,7 +63,7 @@ def start():
             for i in range(len(positions)):
                 print(i,end=' ')
                 positions[i].printTrade()
-                print("---------------------------------------------")
+                print("\n---------------------------------------------")
             choice = int(input())
             print("Enter Price:")
             price  = int(input())
