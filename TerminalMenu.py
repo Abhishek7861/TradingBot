@@ -2,6 +2,7 @@ from py5paisa.logging import log_response
 from requests.models import Response
 import Login as user
 from PaperTrade import paperTrade
+from Database.main import *
 import json
 
 positions = []
@@ -48,7 +49,7 @@ def start():
     obj = paperTrade(client)
     while True:
         print("choose Among the below")
-        print("1: check holding")
+        print("1: View all trades")
         print("2: Check Exited positions")
         print("3: check Active positions")
         print("4: Edit position")
@@ -57,7 +58,8 @@ def start():
         print("0: Exit")
         choice = input()
         if choice=='1':
-            print(json.dumps(client.holdings(), indent = 3))
+            # getAllTrade()
+            pass
         if choice=='2':
             if len(positions)==0:
                 print("No Positions")
@@ -116,6 +118,7 @@ def start():
             response = obj.makeTrade()
             print(response)
             TradeObject = OptionTrade(response[0],response[1],response[2],response[3],response[4],response[5],response[6],response[7])
+            # insertTrade(TradeObject)
             positions.append(TradeObject)
         if choice =='0':
             break    
