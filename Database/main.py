@@ -4,7 +4,7 @@ def createDB():
     con = sqlite3.connect('example.db')
     cur = con.cursor()
     # Create table
-    cur.execute('''CREATE TABLE stocks
+    cur.execute('''CREATE TABLE IF NOT EXISTS stocks
                    (scripSymbol text, strike text, expiry text, optionType text, positionType text, 
                    Exch text, ExchType text, price text, active text, exitPrice text)''')
     # Save (commit) the changes
@@ -14,9 +14,9 @@ def insertTrade(object):
     con = sqlite3.connect('example.db')
     cur = con.cursor()
     # Insert a row of data
-    query = "INSERT INTO stocks (scripSymbol, strike , expiry , optionType , positionType , Exch , ExchType , price , active , exitPrice ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",object.scripSymbol,object.strike,object.expiry,object.optionType,object.positionType,object.Exch,object.ExchType,object.price,object.active,object.exitPrice
-    print(query)
-    cur.execute(query)
+    query = "INSERT INTO stocks (scripSymbol, strike , expiry , optionType , positionType , Exch , ExchType , price , active , exitPrice ) VALUES (?,?,?,?,?,?,?,?,?,?)"
+    cur.execute(query,(object.scripSymbol,object.strike,object.expiry,object.optionType,object.positionType,object.Exch,object.ExchType,object.price,object.active,object.exitPrice))
+    print(cur)
     # Save (commit) the changes
     con.commit()
 

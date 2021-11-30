@@ -47,6 +47,7 @@ class OptionTrade:
 def start():
     client = user.loginUser()
     obj = paperTrade(client)
+    createDB()
     while True:
         print("choose Among the below")
         print("1: View all trades")
@@ -58,8 +59,7 @@ def start():
         print("0: Exit")
         choice = input()
         if choice=='1':
-            # getAllTrade()
-            pass
+            getAllTrade()
         if choice=='2':
             if len(positions)==0:
                 print("No Positions")
@@ -118,7 +118,7 @@ def start():
             response = obj.makeTrade()
             print(response)
             TradeObject = OptionTrade(response[0],response[1],response[2],response[3],response[4],response[5],response[6],response[7])
-            # insertTrade(TradeObject)
+            insertTrade(TradeObject)
             positions.append(TradeObject)
         if choice =='0':
             break    
