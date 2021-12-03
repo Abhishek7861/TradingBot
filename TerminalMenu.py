@@ -45,10 +45,10 @@ class OptionTrade:
 def printPNL(TradeObject,currentprice,Qty):
     if TradeObject.positionType == 'SELL' and TradeObject.active:
         TradeObject.printTrade()
-        print( " PNL: ",(TradeObject.price-currentprice)*Qty)
+        print( "LTP: "+str(currentprice)+"  PNL: ",(TradeObject.price-currentprice)*Qty)
     if TradeObject.positionType == 'BUY' and TradeObject.active:
         TradeObject.printTrade()
-        print( " PNL: ",(currentprice-TradeObject.price)*Qty)
+        print( "LTP: "+str(currentprice)+" PNL: ",(currentprice-TradeObject.price)*Qty)
 
 
 def start():
@@ -75,6 +75,7 @@ def start():
                 if(trade[-2]=='1'):
                     TradeObject = OptionTrade(trade[0],trade[1],trade[2],trade[3],trade[4],trade[5],trade[6],trade[7],trade[8])
                     positions.append(TradeObject)
+                    print(TradeObject.scripSymbol)
             print("--------------------------------")
             print("------Trade load Success--------")
             print("--------------------------------")
@@ -92,6 +93,7 @@ def start():
                     print("---------------------------------------------")
 
 
+
                                     
         if choice=='3':
             if len(positions)==0:
@@ -101,7 +103,7 @@ def start():
                 continue
             for position in positions:
                 currentprice = obj.getLTP(position.Exch,position.ExchType,position.scripSymbol,position.expiry,position.strike,position.optionType)['Data'][0]['LastRate']
-                printPNL(TradeObject,currentprice,Qty)
+                printPNL(position,currentprice,Qty)
                 print("---------------------------------------------")
 
         if choice=='4':
