@@ -55,7 +55,7 @@ class paperTrade:
         expiry = charToNum(date)
         Exch='N'
         ExchType='D'
-
+        
         price = self.getLTP(Exch,ExchType,scripSymbol,expiry,strike,optionType)['Data'][0]['LastRate']
         print("Order placed at : ",price)
         return (scripSymbol,strike,expiry,optionType,positionType,Exch,ExchType,price)
