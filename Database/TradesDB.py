@@ -44,5 +44,5 @@ def exitTrade(id,price):
     cur.execute("UPDATE trade SET active = '0',exitPrice = "+str(price)+" WHERE ID = "+str(id)+";")
     con.commit()
     print("--------------------------------------")
-    print("Exited trade with ID: ",cur.lastrowid)
+    print("Exited trade with ID: ",id)
     print("--------------------------------------")

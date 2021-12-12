@@ -181,12 +181,12 @@ def RunAlgo(obj):
         BookProfit = (value*basketObject.slPercent)/100
         print("MTM: ",MTM)
         print("Value: ",value)
-        print("StopLoss: ",StopLoss)
-        print("BookProfit: ",BookProfit)
-        if MTM >= BookProfit or MTM <= StopLoss:
+        print("StopLoss: ",StopLoss*Qty)
+        print("BookProfit: ",BookProfit*Qty)
+        if MTM >= BookProfit*Qty or MTM <= StopLoss*Qty:
             for position in positions:
                 currentprice = obj.getLTP(position.Exch,position.ExchType,position.scripSymbol,position.expiry,position.strike,position.optionType)['Data'][0]['LastRate']
-                exitTrade(positions[choice].tradeId,currentprice)
+                exitTrade(position.tradeId,currentprice)
             exitBasket(basketObject.id)
             return
         time.sleep(1)
