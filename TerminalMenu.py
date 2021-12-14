@@ -178,7 +178,7 @@ def RunAlgo(obj):
                 value = value+position.price
             MTM = MTM+ getPNL(position,Qty,obj)
         StopLoss = -1*(value*basketObject.slPercent)/100
-        BookProfit = (value*basketObject.slPercent)/100
+        BookProfit = (value*basketObject.bpPercent)/100
         print("MTM: ",MTM)
         print("Value: ",value)
         print("StopLoss: ",StopLoss*Qty)
